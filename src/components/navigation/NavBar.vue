@@ -59,6 +59,11 @@ export default {
       try {
         console.log('logged user out');
       } catch (err) {
+        this.$store.dispatch('addNotification', {
+          title: 'Error',
+          message: err.message,
+          type: 'danger',
+        });
         console.log(err);
       }
     },

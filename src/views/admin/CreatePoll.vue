@@ -148,6 +148,11 @@ export default {
         this.poll.questions.push(addedQuestionId);
         this.closeAddQuestionHandler();
       } catch (error) {
+        this.$store.dispatch('addNotification', {
+          title: 'Error',
+          message: error.message,
+          type: 'danger',
+        });
         console.log(error);
       }
     },
@@ -178,9 +183,10 @@ export default {
         } catch (error) {
           this.$store.dispatch('addNotification', {
             title: 'Error',
-            message: error,
+            message: error.message,
             type: 'danger',
           });
+          console.log(error);
         }
       }
       if (errorMsg) {
@@ -197,16 +203,25 @@ export default {
       if (pollData.title && pollData.questions) {
         this.$store.dispatch('addTemplate', pollData);
         try {
-          console.log('success: saved Template "' + pollData.title + '"');
+          this.$store.dispatch('addNotification', {
+            title: 'Success',
+            message: 'Successfully saved template "' + pollData.title + '"',
+            type: 'success',
+          });
         } catch (error) {
           this.$store.dispatch('addNotification', {
             title: 'Error',
-            message: error,
+            message: error.message,
             type: 'danger',
           });
+          console.log(error);
         }
       } else {
-        console.error('enter valid Data!');
+        this.$store.dispatch('addNotification', {
+          title: 'Error',
+          message: 'Please enter valid data!',
+          type: 'danger',
+        });
       }
     },
     loadTemplateHandler(id) {
@@ -219,8 +234,17 @@ export default {
       //check if changes are made
       await this.$store.dispatch('editTemplate', this.poll);
       try {
-        console.log('success: update Template "' + this.poll.title + '"');
+        this.$store.dispatch('addNotification', {
+          title: 'Success',
+          message: 'Successfully updated template "' + this.poll.title + '"',
+          type: 'success',
+        });
       } catch (error) {
+        this.$store.dispatch('addNotification', {
+          title: 'Error',
+          message: error.message,
+          type: 'danger',
+        });
         console.log(error);
       }
     },
