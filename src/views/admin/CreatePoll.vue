@@ -148,11 +148,6 @@ export default {
         this.poll.questions.push(addedQuestionId);
         this.closeAddQuestionHandler();
       } catch (error) {
-        this.$store.dispatch('addNotification', {
-          title: 'Error',
-          message: error.message,
-          type: 'danger',
-        });
         console.log(error);
       }
     },
@@ -183,10 +178,9 @@ export default {
         } catch (error) {
           this.$store.dispatch('addNotification', {
             title: 'Error',
-            message: error.message,
+            message: error,
             type: 'danger',
           });
-          console.log(error);
         }
       }
       if (errorMsg) {
@@ -203,25 +197,16 @@ export default {
       if (pollData.title && pollData.questions) {
         this.$store.dispatch('addTemplate', pollData);
         try {
-          this.$store.dispatch('addNotification', {
-            title: 'Success',
-            message: 'Successfully saved template "' + pollData.title + '"',
-            type: 'success',
-          });
+          console.log('success: saved Template "' + pollData.title + '"');
         } catch (error) {
           this.$store.dispatch('addNotification', {
             title: 'Error',
-            message: error.message,
+            message: error,
             type: 'danger',
           });
-          console.log(error);
         }
       } else {
-        this.$store.dispatch('addNotification', {
-          title: 'Error',
-          message: 'Please enter valid data!',
-          type: 'danger',
-        });
+        console.error('enter valid Data!');
       }
     },
     loadTemplateHandler(id) {
@@ -234,17 +219,8 @@ export default {
       //check if changes are made
       await this.$store.dispatch('editTemplate', this.poll);
       try {
-        this.$store.dispatch('addNotification', {
-          title: 'Success',
-          message: 'Successfully updated template "' + this.poll.title + '"',
-          type: 'success',
-        });
+        console.log('success: update Template "' + this.poll.title + '"');
       } catch (error) {
-        this.$store.dispatch('addNotification', {
-          title: 'Error',
-          message: error.message,
-          type: 'danger',
-        });
         console.log(error);
       }
     },

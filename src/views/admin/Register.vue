@@ -96,11 +96,6 @@ export default {
           this.loading = false;
         })
         .catch(err => {
-          this.$store.dispatch('addNotification', {
-            title: 'Error',
-            message: err.message,
-            type: 'danger',
-          });
           console.log(err.message);
           this.loading = false;
         });

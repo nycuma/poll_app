@@ -15,7 +15,7 @@ const activePollStore = {
         const fetchedPoll = await fetchDocument('activePolls', pollId);
         commit('setActivePoll', fetchedPoll);
       } catch (err) {
-        this.$store.dispatch('addNotification', {
+        this.dispatch('addNotification', {
           title: 'Error',
           message: err,
           type: 'danger',

@@ -78,11 +78,6 @@ export default {
         await Promise.all([a, b, c]);
       }
     } catch (err) {
-      this.$store.dispatch('addNotification', {
-        title: 'Error',
-        message: err.message,
-        type: 'danger',
-      });
       console.log(err);
     }
 
